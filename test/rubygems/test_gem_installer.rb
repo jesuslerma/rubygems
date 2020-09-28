@@ -1782,13 +1782,22 @@ gem 'other', version
 
   def test_process_options_build_root
     build_root = File.join @tempdir, 'build_root'
+    bin_dir = File.join(build_root, @gemhome, 'bin')
+    gem_home = File.join(build_root, @gemhome)
 
     @gem = setup_base_gem
-    installer = Gem::Installer.at @gem, :build_root => build_root
+    installer = use_ui(@ui) { Gem::Installer.at @gem, :build_root => build_root }
 
     assert_equal build_root, installer.build_root
-    assert_equal File.join(build_root, @gemhome, 'bin'), installer.bin_dir
-    assert_equal File.join(build_root, @gemhome), installer.gem_home
+    assert_equal bin_dir, installer.bin_dir
+    assert_equal gem_home, installer.gem_home
+
+    errors = @ui.error.split("\n")
+
+    assert_equal "WARNING:  You build with buildroot.", errors.shift
+    assert_equal "  Build root: #{build_root}", errors.shift
+    assert_equal "  Bin dir: #{bin_dir}", errors.shift
+    assert_equal "  Gem home: #{gem_home}", errors.shift
   end
 
   def test_shebang_arguments
