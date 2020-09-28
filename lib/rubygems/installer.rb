@@ -694,7 +694,7 @@ class Gem::Installer
 
     unless @build_root.nil?
       require 'pathname'
-      @build_root = Pathname.new(@build_root)
+      @build_root = Pathname.new(@build_root).expand_path
       @bin_dir = File.join(@build_root, @bin_dir)
       @gem_home = File.join(@build_root, @gem_home)
       @plugins_dir = File.join(@build_root, @plugins_dir)
