@@ -696,7 +696,7 @@ class Gem::Installer
       @bin_dir = File.join(@build_root, @bin_dir)
       @gem_home = File.join(@build_root, @gem_home)
       @plugins_dir = File.join(@build_root, @plugins_dir)
-      alert_warning "You build with buildroot.\n  Build root: #{@build_root}\n  Bin dir: #{@bin_dir}\n  Gem home: #{@gem_home}"
+      alert_warning "You build with buildroot.\n  Build root: #{@build_root}\n  Bin dir: #{@bin_dir}\n  Gem home: #{@gem_home}\n  Plugins dir: #{@plugins_dir}"
     end
   end
 
