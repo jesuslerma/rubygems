@@ -693,6 +693,8 @@ class Gem::Installer
     @build_args = options[:build_args] || Gem::Command.build_args
 
     unless @build_root.nil?
+      require 'pathname'
+      @build_root = Pathname.new(@build_root)
       @bin_dir = File.join(@build_root, @bin_dir)
       @gem_home = File.join(@build_root, @gem_home)
       @plugins_dir = File.join(@build_root, @plugins_dir)

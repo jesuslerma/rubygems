@@ -1814,7 +1814,7 @@ gem 'other', version
     @gem = setup_base_gem
     installer = use_ui(@ui) { Gem::Installer.at @gem, :build_root => build_root }
 
-    assert_equal build_root, installer.build_root
+    assert_equal Pathname(build_root), installer.build_root
     assert_equal bin_dir, installer.bin_dir
     assert_equal gem_home, installer.gem_home
 
